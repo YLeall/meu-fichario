@@ -1,0 +1,42 @@
+name: vendas_app
+description: App de Gestão de Vendas para Vendedora Autônoma
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Autenticação (apenas auth — sem uso do banco direto)
+  supabase_flutter: ^2.0.0
+
+  # HTTP para chamar o backend FastAPI
+  http: ^1.2.0
+
+  # Navegação
+  go_router: ^13.0.0
+
+  # UI
+  google_fonts: ^6.0.0
+  shimmer: ^3.0.0
+  fl_chart: ^0.66.0
+
+  # Funcionalidades
+  url_launcher: ^6.2.0
+  image_picker: ^1.0.0
+  pdf: ^3.10.0
+  printing: ^5.12.0
+  flutter_masked_text2: ^0.9.0
+  cached_network_image: ^3.3.0
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true

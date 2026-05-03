@@ -1,0 +1,5 @@
+[phases.install]
+cmds = ["pip install fastapi uvicorn[standard] supabase==2.7.4 supafunc websockets httpx httpcore python-dotenv pydantic apscheduler==3.10.4 python-dateutil"]
+
+[start]
+cmd = "uvicorn main:app --host 0.0.0.0 --port $PORT"
