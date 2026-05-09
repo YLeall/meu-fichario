@@ -13,14 +13,13 @@ class CustomerFormScreen extends StatefulWidget {
 }
 
 class _CustomerFormScreenState extends State<CustomerFormScreen> {
-  final _formKey     = GlobalKey<FormState>();
-  final _nomeCtrl    = TextEditingController();
-  final _phoneCtrl   = phoneMask();
-  final _cpfCtrl     = cpfMask();
-  final _endCtrl     = TextEditingController();
-  final _obsCtrl     = TextEditingController();
-  bool _loading      = false;
-  bool _isEditing    = false;
+  final _formKey   = GlobalKey<FormState>();
+  final _nomeCtrl  = TextEditingController();
+  final _phoneCtrl = phoneMask();
+  final _endCtrl   = TextEditingController();
+  final _obsCtrl   = TextEditingController();
+  bool _loading    = false;
+  bool _isEditing  = false;
 
   @override
   void initState() {
@@ -32,8 +31,8 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
   Future<void> _loadCustomer() async {
     final data = await ApiClient.get('/customers/${widget.customerId}');
     setState(() {
-      _nomeCtrl.text = data['nome'] ?? '';
-      _endCtrl.text  = data['endereco'] ?? '';
+      _nomeCtrl.text = data['nome']       ?? '';
+      _endCtrl.text  = data['endereco']   ?? '';
       _obsCtrl.text  = data['observacoes'] ?? '';
     });
   }
@@ -42,7 +41,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
   void dispose() {
     _nomeCtrl.dispose();
     _phoneCtrl.dispose();
-    _cpfCtrl.dispose();
     _endCtrl.dispose();
     _obsCtrl.dispose();
     super.dispose();
@@ -53,10 +51,9 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
     setState(() => _loading = true);
 
     final body = {
-      'nome':       _nomeCtrl.text.trim(),
-      'telefone':   digitsOnly(_phoneCtrl.text),
-      'cpf':        digitsOnly(_cpfCtrl.text).isEmpty ? null : digitsOnly(_cpfCtrl.text),
-      'endereco':   _endCtrl.text.trim().isEmpty ? null : _endCtrl.text.trim(),
+      'nome':        _nomeCtrl.text.trim(),
+      'telefone':    digitsOnly(_phoneCtrl.text),
+      'endereco':    _endCtrl.text.trim().isEmpty ? null : _endCtrl.text.trim(),
       'observacoes': _obsCtrl.text.trim().isEmpty ? null : _obsCtrl.text.trim(),
     };
 
@@ -98,12 +95,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               keyboardType: TextInputType.phone,
               decoration:   const InputDecoration(labelText: 'Telefone * (DDD + número)', prefixIcon: Icon(Icons.phone_outlined)),
               validator:    (v) => (v == null || digitsOnly(v).length < 10) ? 'Telefone inválido' : null,
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller:   _cpfCtrl,
-              keyboardType: TextInputType.number,
-              decoration:   const InputDecoration(labelText: 'CPF (opcional)', prefixIcon: Icon(Icons.badge_outlined)),
             ),
             const SizedBox(height: 16),
             TextFormField(

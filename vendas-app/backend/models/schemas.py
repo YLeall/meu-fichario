@@ -37,7 +37,6 @@ class InstallmentStatus(str, Enum):
 class CustomerCreate(BaseModel):
     nome:        str
     telefone:    str
-    cpf:         Optional[str] = None
     endereco:    Optional[str] = None
     observacoes: Optional[str] = None
     foto_url:    Optional[str] = None
@@ -46,7 +45,6 @@ class CustomerCreate(BaseModel):
 class CustomerUpdate(BaseModel):
     nome:        Optional[str] = None
     telefone:    Optional[str] = None
-    cpf:         Optional[str] = None
     endereco:    Optional[str] = None
     observacoes: Optional[str] = None
     foto_url:    Optional[str] = None
@@ -57,7 +55,6 @@ class CustomerResponse(BaseModel):
     id:          str
     nome:        str
     telefone:    str
-    cpf:         Optional[str]
     endereco:    Optional[str]
     observacoes: Optional[str]
     foto_url:    Optional[str]

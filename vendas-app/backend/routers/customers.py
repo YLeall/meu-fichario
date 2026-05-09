@@ -29,14 +29,8 @@ def list_customers(
 
 @router.post("", response_model=CustomerResponse, status_code=201)
 def create_customer(body: CustomerCreate, user=Depends(get_current_user)):
-    # Remover não-dígitos do telefone e CPF
-    telefone = "".join(c for c in body.telefone if c.isdigit())
-    cpf      = "".join(c for c in body.cpf if c.isdigit()) if body.cpf else None
-
     data = body.model_dump()
-    data["telefone"] = telefone
-    data["cpf"]      = cpf
-
+    data["telefone"] = "".join(c for c in body.telefone if c.isdigit())
     result = supabase.table("customers").insert(data).execute()
     return result.data[0]
 
@@ -99,8 +93,6 @@ def update_customer(customer_id: str, body: CustomerUpdate, user=Depends(get_cur
 
     if "telefone" in data:
         data["telefone"] = "".join(c for c in data["telefone"] if c.isdigit())
-    if "cpf" in data:
-        data["cpf"] = "".join(c for c in data["cpf"] if c.isdigit())
 
     result = supabase.table("customers").update(data).eq("id", customer_id).execute()
     if not result.data:
